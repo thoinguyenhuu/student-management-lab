@@ -4,10 +4,7 @@
 | Nguyễn Hữu Thời | 2313341 |
 | Lâm Hoàng Vũ    | 2313953|
 # 🌐 Public URL của Web Service
-
-Bạn có thể truy cập Web Service tại đường dẫn sau:
-
-🔗 **https://your-domain.com/api**
+🔗 **https://student-management-lab-wa0z.onrender.com/students**
 
 # Hướng dẫn cách chạy dự án
 
