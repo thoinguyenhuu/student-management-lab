@@ -2,32 +2,107 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Student Detail</title>
     <style>
-        body { font-family: sans-serif; padding: 20px; }
-        .card { border: 1px solid #ddd; padding: 16px; border-radius: 6px; max-width: 520px; }
-        .row { margin-bottom: 8px; }
-        .label { font-weight: 600; }
-        .actions { margin-top: 16px; display: flex; gap: 10px; align-items: center; }
-        .button { background: #1f6feb; color: #fff; padding: 6px 12px; text-decoration: none; border-radius: 4px; }
-        .danger { background: #d1242f; color: #fff; padding: 6px 12px; border: none; border-radius: 4px; }
-        .age-under-18 { color: #c00; font-weight: 600; }
+        @import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Playfair+Display:wght@600&display=swap');
+
+        :root {
+            --bg: #f6f3ee;
+            --ink: #1f2328;
+            --muted: #5a6066;
+            --brand: #0b6e4f;
+            --brand-2: #f4a261;
+            --card: #ffffff;
+            --border: #e2ded7;
+            --danger: #b21f2d;
+        }
+
+        * { box-sizing: border-box; }
+        body {
+            margin: 0;
+            font-family: 'Space Grotesk', system-ui, -apple-system, sans-serif;
+            color: var(--ink);
+            background: radial-gradient(1200px 600px at 10% -10%, #fff6e8 0%, transparent 55%),
+                        radial-gradient(800px 500px at 90% 10%, #e7f5ef 0%, transparent 50%),
+                        var(--bg);
+        }
+        .page {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 32px 20px 64px;
+        }
+        .title {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(26px, 4vw, 38px);
+            margin: 0 0 10px;
+        }
+        .subtitle { color: var(--muted); margin: 0 0 18px; }
+        .card {
+            background: var(--card);
+            border: 1px solid var(--border);
+            border-radius: 18px;
+            padding: 18px;
+            box-shadow: 0 12px 30px rgba(16, 24, 40, 0.08);
+        }
+        .row {
+            display: grid;
+            grid-template-columns: 140px 1fr;
+            padding: 10px 0;
+            border-bottom: 1px dashed var(--border);
+        }
+        .row:last-child { border-bottom: none; }
+        .label { font-weight: 700; color: var(--muted); }
+        .age-under-18 { color: var(--danger); font-weight: 700; }
+
+        .actions {
+            margin-top: 18px;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            align-items: center;
+        }
+        .btn {
+            appearance: none;
+            border: none;
+            padding: 10px 14px;
+            border-radius: 10px;
+            font-weight: 600;
+            cursor: pointer;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .btn-primary { background: var(--brand); color: #fff; }
+        .btn-accent { background: var(--brand-2); color: #3a1f0f; }
+        .btn-danger { background: var(--danger); color: #fff; }
+        .btn-ghost { background: #fff; color: var(--ink); border: 1px solid var(--border); }
+
+        @media (max-width: 640px) {
+            .row { grid-template-columns: 1fr; gap: 6px; }
+        }
     </style>
 </head>
 <body>
-<h1>Student Detail</h1>
-<div class="card">
-    <div class="row"><span class="label">ID:</span> <span th:text="${student.id}">ID</span></div>
-    <div class="row"><span class="label">Name:</span> <span th:text="${student.name}">Name</span></div>
-    <div class="row"><span class="label">Email:</span> <span th:text="${student.email}">Email</span></div>
-    <div class="row"><span class="label">Age:</span> <span th:text="${student.age}" th:classappend="${student.age} < 18 ? 'age-under-18' : ''">0</span></div>
-</div>
-<div class="actions">
-    <a class="button" th:href="@{/students/edit/{id}(id=${student.id})}">Edit</a>
-    <form th:action="@{/students/delete/{id}(id=${student.id})}" method="post" onsubmit="return confirm('Delete this student?');">
-        <button class="danger" type="submit">Delete</button>
-    </form>
-    <a th:href="@{/students}">Back</a>
+<div class="page">
+    <h1 class="title">Student Detail</h1>
+    <p class="subtitle">Full record overview</p>
+
+    <div class="card">
+        <div class="row"><div class="label">ID</div><div th:text="${student.id}">ID</div></div>
+        <div class="row"><div class="label">Name</div><div th:text="${student.name}">Name</div></div>
+        <div class="row"><div class="label">Email</div><div th:text="${student.email}">Email</div></div>
+        <div class="row"><div class="label">Age</div><div th:text="${student.age}" th:classappend="${student.age} < 18 ? 'age-under-18' : ''">0</div></div>
+    </div>
+
+    <div class="actions">
+        <a class="btn btn-primary" th:href="@{/students/edit/{id}(id=${student.id})}">Edit</a>
+        <form th:action="@{/students/delete/{id}(id=${student.id})}" method="post" onsubmit="return confirm('Delete this student?');">
+            <button class="btn btn-danger" type="submit">Delete</button>
+        </form>
+        <a class="btn btn-ghost" th:href="@{/students}">Back</a>
+    </div>
 </div>
 </body>
 </html>
