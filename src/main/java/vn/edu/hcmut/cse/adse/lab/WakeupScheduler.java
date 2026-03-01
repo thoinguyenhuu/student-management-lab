@@ -38,8 +38,8 @@ public class WakeupScheduler {
     }
 
     private String resolveTargetUrl() {
-        String explicitUrl = System.getenv("WAKEUP_URL");
-        if (explicitUrl != null && !explicitUrl.isBlank()) {
+        String explicitUrl = "https://student-management-lab-wa0z.onrender.com/students";
+        if (!explicitUrl.isBlank()) {
             return explicitUrl.trim();
         }
 
