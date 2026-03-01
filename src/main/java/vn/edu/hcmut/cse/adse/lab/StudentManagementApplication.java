@@ -9,7 +9,7 @@ import org.springframework.scheduling.annotation.EnableScheduling;
 public class StudentManagementApplication {
 
 	public static void main(String[] args) {
-				Dotenv.load();
+		Dotenv.configure().ignoreIfMissing().load();
         SpringApplication.run(StudentManagementApplication.class, args);
 	}
 
